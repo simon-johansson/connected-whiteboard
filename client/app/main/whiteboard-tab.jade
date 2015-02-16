@@ -1,0 +1,69 @@
+.container
+
+  .polaroid
+    .row.row-centered
+      .polaroid-content.col-md-6.col-sm-10.col-centered
+
+        //- .magnify
+        //-   <!-- This is the magnifying glass which will contain the original/large version -->
+        //-   .large
+        //-   <!-- This is the small image -->
+        //-   img.small(src="images/macbook.png" width="700")
+        img.small(img-loader, custom-src='{{main.data.current.filename}}', src='assets/images/empty.png', alt='')
+        .large
+        canvas#sketch()
+        //- div(ng-include='"components/overlays/loading_overlay.html"')
+        .loading-overlay
+          .loading
+            .dot.dot1
+            .dot.dot2
+            .dot.dot3
+            .dot.dot4
+        div(ng-include='"components/overlays/info_overlay.html"')
+
+        button.btn.btn-default.pencil-icon(role="button" ng-click="main.startStopDrawing()" ng-class="{ 'btn-success': main.states.drawing }")
+          span.glyphicon.glyphicon-pencil(aria-hidden="true")
+
+        .timestamp-wrapper
+          h4
+            span.is-latest(ng-show="main.isLatestShowing() && main.data.current.type !== 'overlay'")
+              span.text
+                |  Latest
+            //- span.is-new
+            //-   span.text
+            //-     |  New image!
+            |  {{main.data.current.timeAgo}}
+          h4
+            span.timestamp {{main.data.current.timestamp.long}}
+
+
+  .controls
+    .row.row-centered
+      .button-wrapper.col-lg-3.col-md-6.col-sm-6.col-centered
+        .btn-group.btn-group-justified(role="group")
+          .btn-group(dropdown="", is-open='status.isopen')
+
+            a.btn.btn-default.dropdown-toggle(type='button' dropdown-toggle="")
+              span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
+              span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
+              span.caret
+            ul.dropdown-menu(role='menu')
+              //- li(ng-repeat="file in items | limitTo:15")
+              li(ng-repeat="file in main.data.photos")
+                a(href="#" ng-click="main.setIndexTo($index)")
+                 | {{file.timeAgo ? file.timeAgo + " - " + file.timestamp.short : "Loading new photo..."}}
+
+          a.btn.btn-default(role="button" ng-click="main.setIndexToOlder()" ng-disabled="main.isOldestShowing()")
+            span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
+
+          a.btn.btn-default(role="button" ng-click="main.setIndexToNewer()" ng-disabled="main.isLatestShowing()")
+            span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
+
+          a.btn.btn-default(role="button" ng-click="main.setIndexToLatest()" ng-disabled="main.isLatestShowing()")
+            b Latest
+
+          a.btn.btn-default(
+            role="button"
+            ng-click="main.requestNewPhoto()"
+            ng-disabled="main.states.requestingPhoto")
+            span.glyphicon.glyphicon-camera(aria-hidden="true")

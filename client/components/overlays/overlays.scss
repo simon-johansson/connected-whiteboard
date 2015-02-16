@@ -1,0 +1,105 @@
+
+@keyframes reveal {
+  0% {
+    transform: scale(.001);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slide {
+  100% {
+    transform: translateX(30px);
+  }
+}
+
+@keyframes addtokit-reverse {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+
+.info-overlay,
+.loading-overlay {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.info-overlay {
+  left: 0;
+  text-align: center;
+
+  h2 {
+    margin-top: 25%;
+  }
+}
+
+.loading-overlay {
+  opacity: 1;
+  // opacity: 0;
+  // transition: 1s;
+
+  // &.show {
+  //   opacity: 1;
+  // }
+
+  .loading {
+    left: 50%;
+    margin-left: -50px;
+    position: absolute;
+    top: 40%;
+  }
+
+  .dot {
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+    background: $loading-dot;
+    border-radius: 50%;
+    height: 20px;
+    position: absolute;
+    width: 20px;
+  }
+
+  .dot1,
+  .dot2 {
+    left: 0;
+  }
+
+  .dot3 {
+    left: 30px;
+  }
+
+  .dot1 {
+    animation-name: reveal;
+  }
+
+  .dot2,
+  .dot3 {
+    animation-name: slide;
+  }
+
+  .dot4 {
+    animation-direction: reverse;
+    animation-name: reveal;
+    left: 60px;
+  }
+
+}
+
+
+
+
+
+
+
+
