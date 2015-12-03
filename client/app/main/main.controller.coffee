@@ -34,6 +34,7 @@ angular.module 'cwApp'
 
   new class MainCtrl
     constructor: ->
+      console.log photos
       @data =
         photos: angular.copy(photos)
         current: photos[0]
@@ -47,20 +48,20 @@ angular.module 'cwApp'
       @bindEvents()
 
 
-      bindEvents: ->
-        $scope.$on 'fooCalled', (data) -> console.log(data)
-        # $scope.$on 'watingForNewPhoto', (data) -> show InfoOverlay
-        # $scope.$on 'newPhoto', (data) -> show newPhoto or/and notification
+    bindEvents: ->
+      $scope.$on 'fooCalled', (data) -> console.log(data)
+      # $scope.$on 'watingForNewPhoto', (data) -> show InfoOverlay
+      # $scope.$on 'newPhoto', (data) -> show newPhoto or/and notification
 
-        @bindWatch ->
-          @states.index
-        , (newIndex) =>
-          @setCurrentPhoto(newIndex)
+      @bindWatch ->
+        @states.index
+      , (newIndex) =>
+        @setCurrentPhoto(newIndex)
 
-        @bindWatch ->
-          @data.photos[0]
-        , (newIndex) =>
-          @setCurrentPhoto(0)
+      @bindWatch ->
+        @data.photos[0]
+      , (newIndex) =>
+        @setCurrentPhoto(0)
 
     bindWatch: (val, cb) ->
       $scope.$watch angular.bind(@, val), cb
