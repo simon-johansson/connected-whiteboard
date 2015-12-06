@@ -2,6 +2,7 @@
 !node_modules/_
 images/
 public/
+server/json/
 .tmp/
 .sass-cache/
 .idea
