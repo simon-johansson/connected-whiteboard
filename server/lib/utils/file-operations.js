@@ -3,7 +3,7 @@
 
 var fs = require('fs');
 
-var config = require('_/config/environment');
+var config = require('../config/environment');
 
 var readFile = function (path, format, clb) {
   format = format || null;

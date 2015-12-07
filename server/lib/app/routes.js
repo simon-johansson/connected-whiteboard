@@ -4,7 +4,7 @@
 
 'use strict';
 
-var errors = require('_/errors');
+var errors = require('../errors');
 
 module.exports = function(app) {
 

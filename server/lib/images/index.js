@@ -6,9 +6,9 @@ var fs = require('fs');
 var _ = require('lodash');
 var moment = require('moment');
 
-var config = require('_/config/environment');
-var utils = require('_/utils');
-var Image = require('./image-model');
+var config = require('../config/environment');
+var utils = require('../utils');
+var Image = require('./Image');
 
 (function init () {
   console.log('Init');

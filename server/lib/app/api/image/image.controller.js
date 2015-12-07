@@ -14,9 +14,9 @@ var fs = require('fs');
 var _ = require('lodash');
 var moment = require('moment');
 
-var requestImage = require('_/images').requestNewImage;
-var utils = require('_/utils');
-var config = require('_/config/environment');
+var requestImage = require('../../../images').requestNewImage;
+var utils = require('../../../utils');
+var config = require('../../../config/environment');
 
 exports.getImageJson = function(req, res) {
   var jsonPath = config.jsonDir + 'images.json';

@@ -23,7 +23,7 @@ var all = {
     // hours
     thinOut: 24,
     // hours
-    max: 168,
+    max: 99999,
   },
   saveImageFilter: {
     hour: '12',

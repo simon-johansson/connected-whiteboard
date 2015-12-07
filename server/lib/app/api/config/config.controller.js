@@ -11,8 +11,8 @@
 
 var fs = require('fs');
 
-var config = require('_/config/environment');
-var utils = require('_/utils');
+var config = require('../../../config/environment');
+var utils = require('../../../utils');
 
 exports.raspberryPi = function(req, res) {
   var jsonPath = config.jsonDir + '/raspberry-pi-config.json';
