@@ -1,20 +1,12 @@
-/**
- * Main application file
- */
-
- // Set default node environment to development
- process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var watch = require('watch');
-
 var moment = require('moment');
-require('_/config/moment')(moment);
-
-var app = require('_/app')
-var imageTools = require('_/images');
-var config = require('_/config/environment');
-
+var app = require('./lib/app')
+var imageTools = require('./lib/images');
+var config = require('./lib/config/environment');
 var server = require('http').createServer(app);
+
+require('./lib/config/moment')(moment);
 
 // Start server
 server.listen(config.port, config.ip, function () {
