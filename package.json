@@ -1,7 +1,7 @@
 {
   "name": "cw",
   "version": "0.0.0",
-  "main": "server/app.js",
+  "main": "server/index.js",
   "dependencies": {
     "babel": "^6.3.13",
     "babel-core": "^6.3.15",
@@ -9,7 +9,6 @@
     "body-parser": "~1.5.0",
     "composable-middleware": "^0.3.0",
     "compression": "~1.0.1",
-    "connect-mongo": "^0.4.1",
     "cookie-parser": "~1.0.1",
     "cron": "^1.0.5",
     "errorhandler": "~1.0.0",
