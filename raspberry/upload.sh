@@ -6,14 +6,11 @@ QUALITY=10
 WIDTH=1000
 HEIGHT=1000
 
-# server options
-USER="sijo"
-SERVER="trol.la"
-REMOTE_PATH="public_html/connected-whiteboard/images"
-
-# USER="sijoh006"
-# SERVER="web371.webfaction.com"
-# REMOTE_PATH="webapps/connected_whiteboard/images"
+# ftp options
+HOST=$CW_FTP_HOST
+USER=$CW_FTP_USER
+PASSWORD=$CW_FTP_PASSWD
+REMOTE_PATH=$CW_FTP_REMOTEPATH
 
 # remove old images
 rm -rf /home/pi/*.jpg
@@ -31,4 +28,4 @@ convert tmp.jpg \
   $FILENAME.jpg
 
 # upload image
-scp $FILENAME.jpg $USER@$SERVER:$REMOTE_PATH
+curl -T $FILENAME.jpg ftp://$USER:$PASSWORD@$HOST/$REMOTE_PATH
