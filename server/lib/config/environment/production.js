@@ -10,7 +10,7 @@ module.exports = {
 
   // Server port
   port:     process.env.OPENSHIFT_NODEJS_PORT ||
-            process.env.PORT ||
+            process.env.port ||
             22057,
             // 10007,
 
