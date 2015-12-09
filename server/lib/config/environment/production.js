@@ -22,5 +22,5 @@ module.exports = {
             'mongodb://localhost/cw'
   },
 
-  clientDir: 'public',
+  clientDir: 'dist',
 };
