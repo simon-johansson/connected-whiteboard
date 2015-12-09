@@ -100,16 +100,16 @@ selectNodeVersion () {
 
 echo Handling node.js deployment.
 
-# 5. KuduSync
+# 1. KuduSync
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
   "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
   exitWithMessageOnError "Kudu Sync failed"
 fi
 
-# 1. Select node version
+# 2. Select node version
 selectNodeVersion
 
-# 2. Install npm packages
+# 3. Install npm packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   eval $NPM_CMD install
@@ -117,7 +117,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd - > /dev/null
 fi
 
-# 3. Install bower packages
+# 4. Install bower packages
 if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   eval $NPM_CMD install bower
@@ -127,8 +127,9 @@ if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
   cd - > /dev/null
 fi
 
-# 4. Run grunt
+# 5. Run grunt
 if [ -e "$DEPLOYMENT_SOURCE/Gruntfile.js" ]; then
+  cd "$DEPLOYMENT_TARGET"
   eval $NPM_CMD install grunt-cli
   exitWithMessageOnError "installing grunt failed"
   ./node_modules/.bin/grunt --no-color build
