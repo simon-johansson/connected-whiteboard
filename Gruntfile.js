@@ -735,7 +735,7 @@ module.exports = function (grunt) {
     'uglify',
     // 'rev',
     'usemin',
-    'shell:symLink'
+    // 'shell:symLink'
   ]);
 
   grunt.registerTask('default', [
