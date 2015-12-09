@@ -21,9 +21,7 @@
     "morgan": "~1.0.0",
     "node-watch": "^0.3.4",
     "serve-favicon": "~2.0.1",
-    "watch": "^0.13.0"
-  },
-  "devDependencies": {
+    "watch": "^0.13.0",
     "grunt": "~0.4.4",
     "grunt-autoprefixer": "~0.7.2",
     "grunt-wiredep": "~1.8.0",
