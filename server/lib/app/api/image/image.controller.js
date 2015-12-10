@@ -12,7 +12,7 @@
 var fs = require('fs');
 
 var _ = require('lodash');
-var moment = require('moment');
+var moment = require('../../../config/moment');
 
 var requestImage = require('../../../images').requestNewImage;
 var utils = require('../../../utils');
@@ -30,8 +30,6 @@ exports.getImageJson = function(req, res) {
 };
 
 exports.requestNew = function(req, res) {
-  // Kolla om requesten kommer från rätt ställe
-  // sdfsdfasd
 
   var now = moment();
   var jsonPath = config.jsonDir + config.raspberryConfigJSON;
