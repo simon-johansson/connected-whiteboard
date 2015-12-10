@@ -4,7 +4,7 @@
 var fs = require('fs');
 
 var _ = require('lodash');
-var moment = require('moment');
+var moment = require('../config/moment');
 
 var config = require('../config/environment');
 var utils = require('../utils');

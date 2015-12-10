@@ -1,7 +1,7 @@
 
 'use strict';
 
-var moment = require('moment');
+var moment = require('../config/moment');
 var utils = require('../utils');
 
 class Image {

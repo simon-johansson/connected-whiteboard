@@ -2,7 +2,7 @@
 'use strict';
 
 var _ = require('lodash');
-var moment = require('moment');
+var moment = require('../config/moment');
 
 var fileOps = require('./file-operations');
 

@@ -1,12 +1,9 @@
 
 var watch = require('watch');
-var moment = require('moment');
 var app = require('./lib/app')
 var imageTools = require('./lib/images');
 var config = require('./lib/config/environment');
 var server = require('http').createServer(app);
-
-require('./lib/config/moment')(moment);
 
 // Start server
 server.listen(config.port, config.ip, function () {

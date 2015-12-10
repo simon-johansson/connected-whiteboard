@@ -28,13 +28,17 @@ angular.module 'cwApp'
 
     onResize = ->
       width = $(element).width()
+      height = $(document).height()
       $(element).css( "height", 'auto')
-      $(element).css( "height", width * 1.2)
+      # $(element).css( "height", width * 1.3)
+      $(element).css( "height", height * 0.73)
 
     resizeInit = (src, w, h) ->
       width = $(element).width()
+      height = $(document).height()
       $(element).css( "height", 'auto')
-      $(element).css( "height", width * 1.2)
+      # $(element).css( "height", width * 1.3)
+      $(element).css( "height", height * 0.73)
       canvas[0].width = width
       canvas[0].height = $(element).height()
 
