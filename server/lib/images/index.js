@@ -13,7 +13,7 @@ var Image = require('./Image');
 (function init () {
   console.log('Init');
   onNewImage();
-  requestNewImage(moment());
+  // requestNewImage(moment());
 })()
 
 function requestNewImage (timestamp) {
