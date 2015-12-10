@@ -1,6 +1,6 @@
 {
   "name": "connected-whiteboard",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "server/index.js",
   "dependencies": {
     "babel": "^6.3.13",
