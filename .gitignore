@@ -5,7 +5,6 @@ server/json/*.json
 .tmp/
 .sass-cache/
 .idea
-client/bower_components/
-dist/
+client/
 server/config/local.env.js
 *.log
