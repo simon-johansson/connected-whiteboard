@@ -1,6 +1,7 @@
 node_modules/
 /images/
-server/json/
+public/
+server/json/*.json
 .tmp/
 .sass-cache/
 .idea
