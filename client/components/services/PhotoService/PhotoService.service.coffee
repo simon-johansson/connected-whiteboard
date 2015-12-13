@@ -20,9 +20,6 @@ angular.module 'cwApp'
     postRaspberryConfigJSON().
     then ->
       $rootScope.$broadcast('fooCalled', 'test')
-      # ...
-
-
 
   startPolling = (maxTime) ->
     # Använd events sisället för promises
