@@ -1,10 +1,11 @@
 
-'use strict';
+import express from 'express';
+import expressConfig from '../config/express'
+import routes from './routes'
 
-var express = require('express');
-var app = express();
-require('../config/express')(app);
-require('./routes')(app);
+const app = express();
+expressConfig(app);
+routes(app);
 
 // Expose app
-exports = module.exports = app;
+export default app;

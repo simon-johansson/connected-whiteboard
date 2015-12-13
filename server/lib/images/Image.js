@@ -1,13 +1,11 @@
 
-'use strict';
+import moment from '../config/moment';
+import {getDateFromFilename} from './utils';
 
-var moment = require('../config/moment');
-var utils = require('../utils');
-
-class Image {
+export default class Image {
   constructor(filename) {
     this.filename = filename;
-    this.ISOString = utils.getDateFromFilename(filename).toISOString()
+    this.ISOString = getDateFromFilename(filename).toISOString()
     this.id = Math.random().toString(16).slice(2)
     this.timestamp = {
       long: moment(this.ISOString).format('LLLL'),
@@ -15,6 +13,3 @@ class Image {
     }
   }
 }
-
-module.exports = Image;
-

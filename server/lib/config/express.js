@@ -1,21 +1,16 @@
-/**
- * Express configuration
- */
 
-'use strict';
+import express from 'express';
+import favicon from 'serve-favicon';
+import morgan from 'morgan';
+import compression from 'compression';
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+import cookieParser from 'cookie-parser';
+import errorHandler from 'errorhandler';
+import path from 'path';
+import config from './environment';
 
-var express = require('express');
-var favicon = require('serve-favicon');
-var morgan = require('morgan');
-var compression = require('compression');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var cookieParser = require('cookie-parser');
-var errorHandler = require('errorhandler');
-var path = require('path');
-var config = require('./environment');
-
-module.exports = function(app) {
+module.exports = app => {
   var env = app.get('env');
 
   app.set('views', config.root + '/server/lib/views');

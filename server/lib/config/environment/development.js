@@ -1,15 +1,7 @@
-'use strict';
 
-var path = require('path');
+import path from 'path';
 
-// Development specific configuration
-// ==================================
 module.exports = {
-  // MongoDB connection options
-  mongo: {
-    uri: 'mongodb://localhost/cw-dev'
-  },
-  seedDB: true,
 
   // seconds
   minTimeBetweenPhotos: 5,

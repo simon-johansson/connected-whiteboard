@@ -1,17 +1,21 @@
 
-var watch = require('watch');
-var app = require('./lib/app')
-var imageTools = require('./lib/images');
-var config = require('./lib/config/environment');
-var server = require('http').createServer(app);
+import watch from 'watch';
+import http from 'http';
+import app from './lib/app';
+import config from './lib/config/environment';
+import {createImageJSON} from './lib/images';
+
+const server = http.createServer(app);
+
+// Create image.json
+createImageJSON();
 
 // Start server
-server.listen(config.port, config.ip, function () {
- console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+server.listen(config.port, () => {
+ console.log(`Server listening on ${config.port}, in ${app.get('env')} mode`);
 });
 
-watch.createMonitor(config.root + '/images/', function (monitor) {
- monitor.on("created", function (f, stat) {
-   imageTools.onNewImage();
- });
+// Watch for changes in image folder
+watch.createMonitor(`${config.root}/images/`, monitor => {
+ monitor.on('created', createImageJSON);
 });

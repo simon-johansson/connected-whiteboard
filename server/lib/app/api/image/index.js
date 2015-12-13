@@ -1,11 +1,11 @@
 'use strict';
 
-var express = require('express');
-var controller = require('./image.controller');
+import express from 'express';
+import {getImageJson} from './image.controller';
 
-var router = express.Router();
+const router = express.Router();
 
-router.get('/', controller.getImageJson);
-router.post('/request-new', controller.requestNew);
+router.get('/', getImageJson);
+// router.post('/request-new', controller.requestNew);
 
 module.exports = router;

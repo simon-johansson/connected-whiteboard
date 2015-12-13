@@ -1,63 +1,55 @@
 
-'use strict';
+import fs from 'fs';
+import _ from 'lodash';
+import moment from '../config/moment';
+import config from '../config/environment';
+import {
+  writeFile,
+  deleteFile,
+} from '../file-operations';
+import Image from './Image';
+import {
+  sortImageArray,
+  getDateFromFilename,
+} from './utils';
 
-var fs = require('fs');
+// function requestNewImage (timestamp) {
+//   writeFile(
+//     config.jsonDir + config.raspberryConfigJSON,
+//     JSON.stringify(timestamp),
+//     () => console.log('Saved new', config.raspberryConfigJSON));
+// }
 
-var _ = require('lodash');
-var moment = require('../config/moment');
-
-var config = require('../config/environment');
-var utils = require('../utils');
-var Image = require('./Image');
-
-(function init () {
-  console.log('Init');
-  onNewImage();
-  // requestNewImage(moment());
-})()
-
-function requestNewImage (timestamp) {
-  utils.writeFile(
-    config.jsonDir + config.raspberryConfigJSON,
-    JSON.stringify(timestamp),
-    function() {
-      console.log('Saved new', config.raspberryConfigJSON);
-  });
-}
-
-function onNewImage () {
+export const createImageJSON = () => {
   var files = getImageFilenames();
   var arr = [];
-  files.forEach(function(filename) {
+  files.forEach(filename => {
     if (fileShouldBeSaved(filename))
       arr.push(new Image(filename));
     else
-      utils.deleteFile(config.imageDir + filename);
+      deleteFile(config.imageDir + filename);
   });
-  arr.sort(utils.sortImageArray).reverse();
+  arr.sort(sortImageArray).reverse();
   createJSON(arr);
   // Gör ny timestamp i raspberry-pi-config.jso
 }
 
-function getImageFilenames () {
+const getImageFilenames = () => {
   var files = fs.readdirSync(config.imageDir);
   var filtered = _.filter(files, function(f) { return f.indexOf('.jpg') !== -1; });
-  return filtered.map(function(filename) {
-    return filename;
-  })
+  return filtered.map(filename => filename);
 }
 
-function createJSON (obj) {
-  utils.writeFile(
+const createJSON = obj => {
+  writeFile(
     config.jsonDir + 'images.json',
     JSON.stringify(obj),
-    function() {
-      console.log('Saved new images.json');
-  });
+    () => console.log('Saved new images.json')
+  );
 }
 
-function fileShouldBeSaved (filename) {
-  var date = utils.getDateFromFilename(filename);
+const fileShouldBeSaved = filename => {
+  var date = getDateFromFilename(filename);
   var diff = moment().diff(date, 'hours');
   if (diff < 2) {
     return true;
@@ -79,9 +71,4 @@ function fileShouldBeSaved (filename) {
   } else {
     return true;
   }
-}
-
-module.exports = {
-    onNewImage: onNewImage,
-    requestNewImage: requestNewImage
 }
