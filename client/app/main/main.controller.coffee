@@ -1,6 +1,4 @@
 
-'use strict'
-
 class Photo
   constructor: (properties = {}) ->
     unless angular.isObject properties
@@ -34,22 +32,21 @@ angular.module 'cwApp'
 
   new class MainCtrl
     constructor: ->
-      console.log photos
       @data =
         photos: angular.copy(photos)
-        current: photos[0]
+
       @states =
+        current: photos[0]
         index: 0
         requestingPhoto: no
-        drawing: no
+        isDrawing: no
         # Vad göra med params?
         params: $stateParams
 
       @bindEvents()
 
-
     bindEvents: ->
-      $scope.$on 'fooCalled', (data) -> console.log(data)
+      # $scope.$on 'fooCalled', (data) -> console.log(data)
       # $scope.$on 'watingForNewPhoto', (data) -> show InfoOverlay
       # $scope.$on 'newPhoto', (data) -> show newPhoto or/and notification
 
@@ -60,14 +57,14 @@ angular.module 'cwApp'
 
       @bindWatch ->
         @data.photos[0]
-      , (newIndex) =>
+      , () =>
         @setCurrentPhoto(0)
 
     bindWatch: (val, cb) ->
       $scope.$watch angular.bind(@, val), cb
 
     setCurrentPhoto: (index) ->
-      @data.current = @data.photos[index]
+      @states.current = @data.photos[index]
       @setIndexTo(index) unless @states.index is index
 
     requestNewPhoto: ->
@@ -86,41 +83,24 @@ angular.module 'cwApp'
         console.log(err)
         @states.requestingPhoto = no
 
-    # requestNewPhoto: ->
-    #   @states.requestingPhoto = yes
-    #   PhotoService.requestNew()
-    #   .then =>
-    #     maxTime = 120
-    #     @data.photos.unshift new InfoOverlay {$interval: $interval, maxTime: maxTime}
-    #     PhotoService.startPolling {maxTime: maxTime}
-    #   .then (data) =>
-    #     console.log(data)
-    #     @data.photos = data
-    #     @states.requestingPhoto = no
-    #   .catch (err) =>
-    #     console.log(err)
-    #     @states.requestingPhoto = no
-
     setIndexTo: (index) ->
       @states.index = index if index? and @data.photos[index]?
     setIndexToOlder: ->  @setIndexTo(@states.index + 1)
     setIndexToNewer: ->  @setIndexTo(@states.index - 1)
-    setIndexToLatest: -> @setIndexTo(0)
 
     isLatestShowing: -> @states.index is 0
     isOldestShowing: -> @states.index is @data.photos.length - 1
 
-    startStopDrawing: ->
-      if @states.drawing
+    toggleDrawing: ->
+      if @states.isDrawing
         @data.sketcher.destroy()
         window.hideMagnifyer = no
-        console.log(window.hideMagnifyer)
       else
         brush = new Image()
         brush.src = 'assets/images/brush2.png'
         brush.onload = =>
           @data.sketcher = new Sketcher( "sketch", brush )
         window.hideMagnifyer = yes
-      @states.drawing = !@states.drawing
+      @states.isDrawing = !@states.isDrawing
 
 

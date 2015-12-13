@@ -9,7 +9,7 @@
         //-   .large
         //-   <!-- This is the small image -->
         //-   img.small(src="images/macbook.png" width="700")
-        img.small(img-loader, custom-src='{{main.data.current.filename}}', src='assets/images/empty.png', alt='')
+        img.small(img-loader, custom-src='{{main.states.current.filename}}', src='assets/images/empty.png', alt='')
         .large
         canvas#sketch()
         //- div(ng-include='"components/overlays/loading_overlay.html"')
@@ -21,20 +21,20 @@
             .dot.dot4
         div(ng-include='"components/overlays/info_overlay.html"')
 
-        button.btn.btn-default.pencil-icon(role="button" ng-click="main.startStopDrawing()" ng-class="{ 'btn-success': main.states.drawing }")
+        button.btn.btn-default.pencil-icon(role="button" ng-click="main.toggleDrawing()" ng-class="{ 'btn-success': main.states.isDrawing }")
           span.glyphicon.glyphicon-pencil(aria-hidden="true")
 
         .timestamp-wrapper
           h4
-            span.is-latest(ng-show="main.isLatestShowing() && main.data.current.type !== 'overlay'")
+            span.is-latest(ng-show="main.isLatestShowing() && main.states.current.type !== 'overlay'")
               span.text
                 |  Latest
             //- span.is-new
             //-   span.text
             //-     |  New image!
-            |  {{main.data.current.timeAgo}}
+            |  {{main.states.current.timeAgo}}
           h4
-            span.timestamp {{main.data.current.timestamp.long}}
+            span.timestamp {{main.states.current.timestamp.long}}
 
 
   .controls
@@ -59,7 +59,7 @@
           a.btn.btn-default(role="button" ng-click="main.setIndexToNewer()" ng-disabled="main.isLatestShowing()")
             span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
 
-          a.btn.btn-default(role="button" ng-click="main.setIndexToLatest()" ng-disabled="main.isLatestShowing()")
+          a.btn.btn-default(role="button" ng-click="main.setIndexTo(0)" ng-disabled="main.isLatestShowing()")
             b Latest
 
           a.btn.btn-default(
