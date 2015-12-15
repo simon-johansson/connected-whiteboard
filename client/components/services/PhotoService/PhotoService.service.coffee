@@ -34,8 +34,6 @@ angular.module 'cwApp'
         # $rootScope.$broadcast('fooCalled', 'test')
       else
         getImageJSON().then (result) ->
-          # console.log counter
-          # console.log cache, photos[0]
           if cache.id is photos[0].id
             $timeout fn, timeoutTime
           else d.resolve(result)
