@@ -6,4 +6,4 @@ angular.module 'cwApp'
   .state 'about',
     url: '/about',
     templateUrl: 'app/about/about.html'
-    # controller: 'AboutCtrl as about'
+    controller: 'AboutCtrl as about'

@@ -43,6 +43,8 @@ angular.module 'cwApp'
         # Vad göra med params?
         params: $stateParams
 
+      angular.element(document).find('body').css('overflow', 'hidden')
+
       @bindEvents()
 
     bindEvents: ->
